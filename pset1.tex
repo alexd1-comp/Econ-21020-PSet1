@@ -83,10 +83,10 @@ Var(Y) = Var(a+bX) = $b^2Var(X)$ = $b^2$, since X is the standard normal distrib
 \newpage
 \section{}
 
-Take n $\in$ N and let {\{$X_i}\}_{i=1}}^n$ be a collection of independent random variables with supp X_i = $$\{0,1\}$ and p = P(X_i = 1),  $\forall$i = 1,....,n.
-Define X_n = {\{$X_i}\}_{i=1}}^n$ $X_i$.
+Take n $\in$ N and let {\{$X_i}\}_{i=1}}^n$ be a collection of independent random variables with supp X_i = $$\{0,1\}$ and p = $P(X_i = 1)$,  $\forall$i = 1,....,n.
+Define $X_n$ = {\{$X_i}\}_{i=1}}^n$ $X_i$.
 
-3a) E[X_n] = E($\sum_{i=1}^n{X_i}$)
+3a) $E[X_n]$ = E($\sum_{i=1}^n{X_i}$)
 
 =  $\sum_{i=1}^nE({X_i})$ by Sum of expectations of independent trials, meaning the expectation of a product of independent random variable is the product of their expectations.
 
@@ -98,11 +98,11 @@ Thus, the sum of n identical $X_i$ terms is equivalent to the product of n * the
 
 We know that the expectation of a binomial distribution $E(X_n)$ = np from 3a.
 
-Var(X) = E(X^2) = (E(X))^2
+Var(X) = $E(X^2)$ = $(E(X))^2$
 
-E(X^2) = np- np^2 = np(1-p)
+$E(X^2)$ = np- $np^2$ = np(1-p)
 
-(E(X))^2 = n^2p^2 - (np)^2 = 0
+$(E(X))^2$ = $n^2p^2$ - $(np)^2$ = 0
 
 Thus Var(X) = np(1-p)
 
@@ -112,27 +112,45 @@ Thus Var(X) = np(1-p)
 \newpage
 \section{}
 
-4a) Show that P(Y=y) = E $\sum_{x\in g^-1(y)}$ P(X=x).
+4a) Show that P(Y=y) = $\sum_{x\in g^-1(y)}$ P(X=x).
+
+E[Y] = $\sum_{y\in Y}$y P(Y=y), so by the definition of expected value of a discrete variable, 
+
+$f_Y(y)$ = P(Y=y).
+
+We know that Y $\equiv$ g(x), 
+
+so $g^{-1}$ (y) = $\{x_1,x_2,....\}$ when x $\in$ $\mathcal{X}$
+
+So that all $x_i$ sum to $\sum_{x\in g^-1(y)}$ P(X = $x_i$)
+
+Finally, $f_y(Y)$ = P(Y=y) = $\sum_{x\in g^-1(y)}$ P(X = $x_i$).
 
 
-\begin{figure}[!htbp]
-    \centering
-    \caption{Pictures of Pets}
-     \begin{subfigure}[b]{0.285\textwidth}
-     \centering
-     \includegraphics[width=\textwidth]{Figures/pset1/dog.jpeg}
-     \caption{A dog}
-     \end{subfigure} \hspace{1em}
-     \begin{subfigure}[b]{0.4\textwidth}
-     \centering
-     \includegraphics[width=\textwidth]{Figures/pset1/cat.jpeg}
-     \caption{A cat}
-     \end{subfigure} 
-     \vskip0.7em
-\begin{minipage}{1\textwidth} 
-{\footnotesize \begin{spacing}{1} \textit{Notes.} Figure notes would go here.\end{spacing}} 
-\end{minipage}
-\end{figure}
+4b) Show that E[g(X)] = $\sum_{x\in \mathcal{X}}$ g(x) P(X = x)
+
+E[Y] = E[g(X)] = $\sum_{y\in Y}$y P(Y=y).
+
+From part 4a), we know that P(Y=y) = $\sum_{x\in g^-1(y)}$ P(X=x), so therefore E[g(X)] = $\sum_{y\in Y}$ y $\sum_{x\in g^-1(y)}$ P(X=x). 
+
+Furthermore, y = g(x), so  E[g(X)] = $\sum_{y\in Y}$ g(x) $\sum_{x\in g^-1(y)}$ P(X=x) = E[g(X)] 
+
+= $\sum_{y\in Y}$ $\sum_{x\in g^-1(y)}$  g(x) P(X=x).
+
+From the hint provided, it is known that $\sum_{y\in Y}$ $\sum_{x\in g^-1(y)}$ could be better written as $\sum_{x\in \mathcal{X}}$.
+
+Therefore, the final equation is E[g(X)] = $\sum_{x\in \mathcal{X}}$ g(x) P(X = x).
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 5 %%%%%%%%%%
+\newpage
+\section{}
+
+5a) Show that $\underset{a \in{R}}{\arg\min}$ E[(X-a)^2] = E[X]. 
+
+That is, show that the mean of X is the best constant predictor of X under the $L^2$ loss function.
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Github Link to Repository %%%%%%%%%
