@@ -59,72 +59,61 @@ Table 1: Joint Probability Mass Function
 \newpage
 \section{}
 
-This section provides some simple math expressions using Example 2.21 from \citet{wasserman2003all}.
+Let X $\sim$N(0,1) and define Y $\equiv$ a + bX for a,b $\in$ R.
 
-Let $(X, Y)$ be random variables with density 
-\begin{align}\label{pset1:eq_density}
-    f(x, y) = \begin{cases} % Cases are used for the curly bracket
-        x + y, & \quad \text{if } x, y \in [0, 1] \\
-        0, & \quad \text{otherwise.}
-    \end{cases}
-\end{align}
+2a) E[Y] = $E_X$[h(X)], by the Law of the Unconscious Statistician.
 
-To verify that \eqref{pset1:eq_density} is a density, note that
-\begin{align}
-    \begin{aligned} % aligned assures that there is a single equation number associated with this derivation
-        \int_{-\infty}^\infty\int_{-\infty}^\infty f(x, y) dxdy & = \int_0^1\int_0^1 (x + y) dxdy \\
-        & = \int_0^1\left(\int_0^1 x dx\right)dy + \int_0^1\left(\int_0^1 y dy\right)dx \\
-        & = \int_0^1\frac{1}{2}dy + \int_0^1\frac{1}{2}dx \\
-        & = \frac{1}{2} + \frac{1}{2}\\
-        & = 1,
-    \end{aligned}
-\end{align}
-which is the desired result.
+Thus, E[Y] = $E_X$[h(X)] = \int_{-\infty}^\infty h(x)f$_X$(x)dx,
+as X is continuous.
 
-\href{https://oeis.org/wiki/List_of_LaTeX_mathematical_symbols}{\underline{This website}} is a great resource for math symbols (e.g., Greek letters such as $\alpha, \Sigma$ or $\varepsilon$).
+It is known that  Y $\equiv$ a + bX, so E[a + bX] = \int_{-\infty}^\infty a + bX f$_X$(x)dx
+
+Since X is the standard normal distribution, we know that f(x)= e^{-x^2/2}/\sqrt{2\pi}
+
+Plugging that into the prior integral, we get that E[Y] = E[a+bX] = \int_{0}^1 a + bx * e^{-x^2/2}/\sqrt{2\pi}dx
+
+2b)
+
+We know that Var(a+bX) = b^2Var(X), so:
+
+Var(Y) = Var(a+bX) = $b^2Var(X)$ = $b^2$, since X is the standard normal distribution, Var(X) = 1.
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Problem 3 %%%%%%%%%%
 \newpage
 \section{}
 
-This section contains a simple table for presenting, for example, summary statistics or regression results. Table \ref{pset1:tab_estres} provides (entirely made-up) results of linear regression (Panel A) and two-stage least squares (Panel B) on the returns to education. 
+Take n $\in$ N and let {\{$X_i}\}_{i=1}}^n$ be a collection of independent random variables with supp X_i = $$\{0,1\}$ and p = P(X_i = 1),  $\forall$i = 1,....,n.
+Define X_n = {\{$X_i}\}_{i=1}}^n$ $X_i$.
 
-\begin{table}[!htbp] \small 
-  \centering 
-  \begin{threeparttable}
-  \caption{Estimation Results}\label{pset1:tab_estres}
-\begin{tabular}{llcc} \toprule \midrule 
-      &       & Employed & $\log$-Income  \\ 
-      &       & (1) & (2) \\ \midrule
-\multicolumn{3}{l}{\textit{Panel A:  OLS}} \\
-      & High School & 0.262 & 0.290 \\
-      &       & (0.063) & (0.120) \\
-      & College Degree & 0.345 & 0.400\\
-      &       & (0.087) & (0.091) \\
-      &       &          & \\
-\multicolumn{3}{l}{\textit{Panel B:  TSLS}} \\
-      & High School & 0.0797 & 0.22 \\
-      &       & (0.0281) & (0.045) \\
-      & College Degree & 0.121 & 0.321\\
-      &       & (0.030) & (0.123) \\
-      &       &          & \\
-      &  Observations & 320 & 282 \\ \midrule \bottomrule
-\end{tabular}%
-  \begin{tablenotes}[para,flushleft]
-  \footnotesize \item \textit{Notes.} Table notes go here.
-  \end{tablenotes}
-    \end{threeparttable}
-\end{table}
+3a) E[X_n] = E($\sum_{i=1}^n{X_i}$)
 
-There are many tools for generating \LaTeX \ tables, from simple websites (e.g., \href{https://www.tablesgenerator.com/}{\underline{tablesgenerator.com}}) to packages for your favorite programming language (e.g., \href{https://cran.r-project.org/web/packages/xtable/index.html}{\underline{\texttt{xtable}}}). To get started, I recommend using the excel-plug in \href{https://ctan.org/thttps://cran.r-project.org/web/packages/xtable/index.htmlex-archive/support/excel2latex?lang=en}{\underline{\texttt{excel2latex}}}. 
+=  $\sum_{i=1}^nE({X_i})$ by Sum of expectations of independent trials, meaning the expectation of a product of independent random variable is the product of their expectations.
+
+We know that p = $P(X_i = 1)$ = $E(X_i)$ due  to $X_i$ being a random variable in the Bernoulli(p) distribution.
+
+Thus, the sum of n identical $X_i$ terms is equivalent to the product of n * the expectation of $X_i$. Therefore, $E[X_n]$ = n*p = np.
+
+3b)
+
+We know that the expectation of a binomial distribution $E(X_n)$ = np from 3a.
+
+Var(X) = E(X^2) = (E(X))^2
+
+E(X^2) = np- np^2 = np(1-p)
+
+(E(X))^2 = n^2p^2 - (np)^2 = 0
+
+Thus Var(X) = np(1-p)
+
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Problem 4 %%%%%%%%%%
 \newpage
 \section{}
 
-This section contains a simple figure with two panels.
+4a) Show that P(Y=y) = E $\sum_{x\in g^-1(y)}$ P(X=x).
+
 
 \begin{figure}[!htbp]
     \centering
