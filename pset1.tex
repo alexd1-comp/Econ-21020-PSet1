@@ -152,13 +152,13 @@ That is, show that the mean of X is the best constant predictor of X under the $
 
 Take the first order condition of \underset{a \in{R}}{\arg\min}$ E[(X-a)^2].
 
-2a - 2EXa + 2EX = 0
+2a - 2E[X]a + 2E[X] = 0
 
-2EX(a+1) = -2a
+2E[X](a+1) = -2a
 
-2EX = -2a/a+1
+2E[X] = -2a/a+1
 
-EX = -a/2(a+1)
+E[X] = -a/2(a+1)
 
 which is minimized when a = E[X].
 
@@ -185,19 +185,37 @@ Let h be some function of Y such that E[h(Y)$\mid$] $< \infty$.
 
 Show that E[Uh(Y)] = 0
 
-E[Uh(Y)] = E[X-E[X$\mid$Y]h(Y)] 
+E[Uh(Y)] = E[E[U$\mid$Y]h(Y)] 
 
-= E[Xh(Y) - E[X$\mid$Y]]
+= E[h(Y)] - E[U$\mid$Y]]
 
-= E[Xh(Y)] - E[E[X$\mid$ Y]]
+= As E[U$\mid$Y] = 0 because of 6a.
 
-= E[Xh(Y)] - E[X$\mid$ Y] = 0.
+= E[h(Y)] - E[U$\mid$ Y] = 0.
 
 Thus, E[Uh(Y)] = 0.
 
 6c)
 
 Show that E[V^2] $\geq$ E[U^2].
+
+[V]^2 = [U - h(Y)]^2
+
+E[V]^2 = E[U - h(Y)]^2
+
+E[V]^2 = E[U]^2 - 2E[Uh(Y)] + h(Y)^2
+
+2E[Uh(Y)] = 0 from 6b.
+
+E[V]^2 = E[U]^2 + h(Y)^2
+
+h(Y)^2 > 0, 
+
+Therefore, E[V^2] $\geq$ E[U^2].
+
+6d) 
+
+The result from part (c) shows that E[X$\mid$ Y] is the best predictor of X given Y under the $L^2$ loss. Because of the result from part (c), it is shown that there cannot be any predictor that is better due to the inequality.
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Problem 7 %%%%%%%%%%
@@ -208,7 +226,9 @@ Show that E[V^2] $\geq$ E[U^2].
 
 Show that if X is independent to Y, then E[Y $\mid$ X] = E[Y].
 
-Let A $\in$ X so $\int_{A}$ YdP = Y * E[I_{A}] = E[Y]E[I_{A}] = E[Y]P(A) = $\int_{A}$E[Y]dP. Therefore, by the definition of conditional expectation, E[Y] = E[Y $\mid$ X].
+Let A $\in$ X so $\int_{A}$ YdP = Y * E[I_{A}] = E[Y]E[I_{A}] = E[Y]P(A) = $\int_{A}$E[Y]dP. 
+
+Therefore, by the definition of conditional expectation, E[Y] = E[Y $\mid$ X].
 
 7b) If X is independent to Y, Cov(X,Y) = E(X)E(Y) = 0 * 0 = 0.
 
@@ -234,6 +254,7 @@ However, X is not independent to Y since when X = -1, Y has to = 0, while when X
 8a) Generate n = 10000 draws from a standard normal random variable N(0,1) and plot the simulated data in a histogram using ggplot2.
 
 \begin{lstlisting}[language=R]
+library(ggplot2)
 data=data.frame(value=rnorm(10000))
 p <- ggplot(data, aes(x=value)) + 
 geom_histogram()
