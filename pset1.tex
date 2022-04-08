@@ -95,7 +95,7 @@ We know that p = $P(X_i = 1)$ = $E(X_i)$ due  to $X_i$ being a random variable i
 
 Thus, the sum of n identical $X_i$ terms is equivalent to the product of n * the expectation of $X_i$. Therefore, $E[X_n]$ = n*p = np.
 
-$\textbf{3.2}$ We know that the expectation of a binomial distribution $E(X_n)$ = np from 3a.
+$\textbf{3.2}$ We know that the expectation of a binomial distribution $E(X_n)$ = np from 3.1.
 
 Var(X) = $E(X^2)$ = $(E(X))^2$
 
@@ -186,7 +186,7 @@ E[Uh(Y)] = E[E[U$\mid$Y]h(Y)]
 
 = E[h(Y)] - E[U$\mid$Y]]
 
-= As E[U$\mid$Y] = 0 because of 6a.
+= As E[U$\mid$Y] = 0 because of 6.1.
 
 = E[h(Y)] - E[U$\mid$ Y] = 0.
 
@@ -200,7 +200,7 @@ E[V]^2 = E[U - h(Y)]^2
 
 E[V]^2 = E[U]^2 - 2E[Uh(Y)] + h(Y)^2
 
-2E[Uh(Y)] = 0 from 6b.
+2E[Uh(Y)] = 0 from 6.2.
 
 $E[V]^2 = E[U]^2 + h(Y)^2.$ As h(Y)^2 > 0, 
 
@@ -259,6 +259,7 @@ p
 
 
 $\textbf{8.2}$
+Generate n = 10000 draws from a uniform random variable U (−1, 1) and plot the simulated data in a histogram using ggplot2.
 \begin{lstlisting}[language=R]
 y = runif(10000,-1,1)
 data=data.frame(value=y)
