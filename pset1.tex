@@ -167,9 +167,129 @@ which is minimized when a = E[X].
 \newpage
 \section{}
 
-6a) Define U $\equiv$ X - E[X$\cap$Y]. Show that E[U$\cap$Y] = 0.
+6a) Define U $\equiv$ X - E[X$\mid$Y]. Show that E[U$\mid$Y] = 0.
+
+E[U$\mid$Y] = E[X-E[X$\mid$Y]$\mid$Y] 
+
+= E[X$\mid$ Y - E[X$\mid$Y]]
+
+= E[X $\mid$ Y] -E[E[X$\mid$ Y]]
+
+= E[X $\mid$ Y] - E[X $\mid$ Y] = 0
+
+Thus, E[U$\mid$Y] = 0
+
+6b)
+
+Let h be some function of Y such that E[h(Y)$\mid$] $< \infty$.
+
+Show that E[Uh(Y)] = 0
+
+E[Uh(Y)] = E[X-E[X$\mid$Y]h(Y)] 
+
+= E[Xh(Y) - E[X$\mid$Y]]
+
+= E[Xh(Y)] - E[E[X$\mid$ Y]]
+
+= E[Xh(Y)] - E[X$\mid$ Y] = 0.
+
+Thus, E[Uh(Y)] = 0.
+
+6c)
+
+Show that E[V^2] $\geq$ E[U^2].
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 7 %%%%%%%%%%
+\newpage
+\section{}
+
+7a) 
+
+Show that if X is independent to Y, then E[Y $\mid$ X] = E[Y].
+
+Let A $\in$ X so $\int_{A}$ YdP = Y * E[I_{A}] = E[Y]E[I_{A}] = E[Y]P(A) = $\int_{A}$E[Y]dP. Therefore, by the definition of conditional expectation, E[Y] = E[Y $\mid$ X].
+
+7b) If X is independent to Y, Cov(X,Y) = E(X)E(Y) = 0 * 0 = 0.
+
+As Cov(X,Y) = 0, thus Corr(X,Y) = 0 also.
+
+7c) Let's say (X,Y) is drawn uniformly at random from four points (0,1), (0,-1), (1,0), and (-1,0).
+
+We know that E(X) = 0, since 1/2 * 0 + 1/4 * 1 + 1/4 *-1 = 0.
+
+Similarly, E(Y) = 0.
+
+E(XY) = 0, because XY = 0 almost surely
+
+Therefore, Cov(X,Y) = E(XY) = 0, so Corr(X,Y) = 0.
+
+However, X is not independent to Y since when X = -1, Y has to = 0, while when X = 0, Y can equal -1 $\leq$ Y $\leq$ 1.
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 8 %%%%%%%%%%
+\newpage
+\section{}
+
+8a) Generate n = 10000 draws from a standard normal random variable N(0,1) and plot the simulated data in a histogram using ggplot2.
+
+\begin{lstlisting}[language=R]
+data=data.frame(value=rnorm(10000))
+p <- ggplot(data, aes(x=value)) + 
+geom_histogram()
+p
+\end{lstlisting}
 
 
+8b)
+\begin{lstlisting}[language=R]
+y = runif(10000,-1,1)
+data=data.frame(value=y)
+p <- ggplot(data, aes(x=value)) + 
+geom_histogram()
+p
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 9 %%%%%%%%%%
+\newpage
+\section{}
+
+a) Let X $\sim$ Bernoulli(p) and U $\sim$ Uniform(0,1). Show that
+
+P(I{\{U $\leq$ p}\} = 1) = p
+
+and conclude that I\{U $\leq$p\} and X are identically distributed. 
+
+P(I{\{U $\leq$ p}\} = 1) = P(U $\leq$ p)
+
+= p - 0 / 1- 0  = p. Comes from the distribution function of uniform random variables.
+
+Therefore, as P(I{\{U $\leq$ p}\} = 1) = P(X=1), and supp I\{U$\leq$ p\}, = supp X = \{0,1\}, it follows that U and X are identically distributed.
+
+b)
+
+\begin{lstlisting}[language=R]
+my_rbernoulli <- function (n,p){
+  runif(n) < p
+}
+x <- my_rbernoulli(10000,0.5)
+length(x) == 10000
+mean(x)
+\end{lstlisting}
+
+c)
+
+\begin{lstlisting}[language=R]
+my_rbinomial <- function(n,p,m){
+  m * my_rbernoulli(n,p)
+}
+x <- my_rbinomial(10000,0.5,10)
+length(x) == 10000
+mean(x)
+\end{lstlisting}
+
+%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%
 % Github Link to Repository %%%%%%%%%
@@ -178,22 +298,6 @@ which is minimized when a = E[X].
 
 https://github.com/alexd1-comp/Econ-21020-PSets
 
-%%%%%%%%%%%%%%%%%%%%%%
-% Appendix %%%%%%%%%%%
-\newpage
-\appendix
-
-\section{Code}
-
-This appendix contains the code used for the analysis. 
-
-\begin{lstlisting}[language=R, basicstyle=\footnotesize\ttfamily]
-# Insert code here (if applicable).
-x <- FALSE
-if (x) {
-    make_a_joke()
-}#IF
-\end{lstlisting}
 
 
 
