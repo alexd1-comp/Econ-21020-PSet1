@@ -134,7 +134,7 @@ From 4.1, we know that E[YX] / E[X] = E[Y $\mid$ X=1].
 
 Thus, $g(A_{n}, B_{n})$ $\xrightarrow{p}$ E[Y $\mid$ X=1].
 
-$\forall E[X] \in R.$
+$\forall E[X] \in R$ except E[X] = 0.
 
 \textbf{4.6} Show that $\sqrt{n}$ ($\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X= 1]) = $\sqrt{n}$ (1/n$\sum^n_{i=1} X_{i}U_{i}$ / (1/n$\sum^n_{i=1} X_{i}$)).
 
@@ -211,5 +211,50 @@ Var(UX) = Var(Y$\mid$X=1)P(X=1)/ $P(x=1)^2$
 Var(Y$\mid$X=1)P(X=1)/ $P(x=1)^2$ = Var(Y$\mid$X=1)/P(X=1))
 
 Thus, we can conclude that $\sqrt{n}$ ($\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X = 1]) $\xrightarrow{d}$ N(0,Var(Y$\mid$X=1)/ P(C=1))
+
+\textbf{4.8}
+
+Var(Y$\mid$X=1) = E[$Y^2$ \mid$X=1] - (E[Y$\mid X = 1])^2$
+
+The sample analogue $\hat{\sigma}^2_{Y\mid1}$ =
+$\sum^n_{i=1} X_{i}Y_{i}^2$/ $\sum^n_{i=1} X_{i}$ - ($\sum^n_{i=1} (X_{i}Y_{i})$ / $\sum^n_{i=1} X_{i})^2$
+
+The sample analogue $\hat{p}_{X}$ = 1/n $\sum^n_{i=1}I\{X_{i}=1\}
+
+\textbf{4.9}
+
+Show that $\hat{\sigma}^2_{Y\mid1}$ $\xrightarrow{p}$ ${\sigma}^2_{Y\mid1}$
+
+Do 4 step process:
+
+1.
+Define:
+
+$A_{n}$ is congruent to 1/n $\sum^n_{i=1} X_{i}Y_{i}^2$
+
+$B_{n}$ is congruent to 1/n $\sum^n_{i=1} X_{i}$
+
+2. Define g(a,b) = a/b
+
+3. 
+
+By WLLN, we get that $A_{n}$ $\xrightarrow{p}$ E[X$Y^2$]
+
+By WLLN, we get that $B_{n}$ $\xrightarrow{p}$ E[X]
+
+4. By CMT:
+
+$g(A_{n}, B_{n})$ $\xrightarrow{p}$ E[$Y^2$X] / E[X] 
+
+We know that ($\sum^n_{i=1} (X_{i}Y_{i})$ / $\sum^n_{i=1} X_{i})$ $\xrightarrow{p}$ $(E[XY]/E[X])$ from part 4.5
+
+Thus,
+$\sum^n_{i=1} X_{i}Y_{i}^2$/ $\sum^n_{i=1} X_{i}$ - ($\sum^n_{i=1} (X_{i}Y_{i})$ / $\sum^n_{i=1} X_{i})^2$ $\xrightarrow{p}$ E[$Y^2$X] / E[X] - $(E[XY]/E[X])^2$
+
+= $\hat{\sigma}^2_{Y\mid1}$ $\xrightarrow{p}$ ${\sigma}^2_{Y\mid1}$
+
+$\forall E[X] \in R$ except E[X] = 0.
+
+
 
 \end{document}
