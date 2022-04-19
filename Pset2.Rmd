@@ -1,0 +1,59 @@
+---
+output:
+  pdf_document: default
+  html_document: default
+---
+5.1:
+```{r}
+# Load the ak91.csv data
+df = read.csv("C:\\Users\\alexm\\Documents\\ak91.csv")
+n = 329509
+# Store years of education and the weekly wage in separate variables
+yrs_educ = df$YRS_EDUC
+wkly_wage = df$WKLY_WAGE
+
+# Find college graduates
+has_college_degree = yrs_educ == 16
+
+# Sample Analogue estimator
+Xi = has_college_degree
+px = 1/n * sum(Xi)
+print(sum(Xi))
+print(px)
+```
+5.2:
+```{r}
+Xi = has_college_degree
+Yi = wkly_wage
+
+mu_college = sum(Xi * Yi)/sum(Xi)
+
+print(mu_college)
+```
+
+5.3:
+```{r}
+Xi = has_college_degree
+Yi = wkly_wage
+
+a = (sum(Yi * Xi)/ sum(Xi))^ 2
+b= sum(Xi * Yi)^2 / sum(Xi)
+c = b-a
+d = px
+e = sqrt((a/d))
+print(a)
+se_college = 1/sqrt(sum(Xi)) * e
+print(se_college)
+```
+5.4
+```{r}
+mu_college + qnorm(0.975)*se_college 
+mu_college - qnorm(0.975)*se_college
+```
+confidence_int = (575.78, 613.20)
+
+5.5:
+I would fail to Reject $H_{0}$ at a 5% significance level. An economic interpretation is that the mean weekly wage of a college graduate is not significantly different from $600.
+
+5.6:
+I would fail to Reject $H_{0}$ at a 5% significance level. An economic interpretation is that the mean weekly wage of a college graduate is not significantly different from $595.
