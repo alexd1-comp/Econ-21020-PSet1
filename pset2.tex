@@ -1,0 +1,215 @@
+%%%%%%%%%%%%%%%%%%%%%%
+% Preamble %%%%%%%%%%%
+\input{preamble.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Main Document %%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Document header %%%%
+{\LARGE \centering ECON 21020 -- Problem Set 2\par}
+{\vspace{-1em} \large \centering Alex Ding \par}
+{\centering \vspace{-1em} \today \par }
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1 %%%%%%%%%%
+\section{}
+\textbf{1.1}
+
+True. If E[UX] = 0, then E[U$\mid$X] = 0.
+
+By the Law of Iterated Expectations:
+
+E[UX] = E[E[U$\mid$X]X]
+
+Since we know that E[UX] = 0, we know that E[U$\mid$X] = 0.
+
+\textbf{1.2}
+
+Here is a counterexample.
+Let X be the discrete distribution that takes either 1 or 2 with equal probability.
+
+Thus E[X] = 3/2, then 1/E[X] = 2/3.
+
+E[1/X] = E[1/(3/2)] = 3/4.
+
+Since 2/3 does not equal to 3/4, the answer is false.
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 2 %%%%%%%%%%
+
+\section{}
+
+\textbf{2.1}
+
+The drivers can be correct because the sample distribution does not have to be normal.
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 3 %%%%%%%%%%
+\section{}
+
+\textbf{3.1}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 4 %%%%%%%%%%
+\section{}
+
+\textbf{4.1} Show that E[Y$\mid$ X = 1] = E[XY]/E[X].
+
+E[XY] = E[YX]
+
+E[YX] = E[Y $\mid$ X=1] E[X]
+
+E[YX] = E[E[YX $\mid$ X]]  = E[XE[Y $\mid$ X]
+
+E[YX] = E[Y$\mid$ X=1] * 1 * P(X=1) + E[Y$\mid$ X=0] * 0 P[X=0]
+
+E[Y $\mid$X=0] * 0 * P[X=0] = 0.
+
+The indicator I = p, because X is Bernoulli distr, so E[X] = I * [X = 1] = P[X=1].
+
+E[X] = P(X=1).
+
+E[XY] = E[Y$\mid$ X = 1] * E[X]
+
+Thus, E[Y$\mid$ X = 1] = E[XY]/E[X].
+
+\textbf{4.2}
+
+We will do a ratio $A_{n} / B_{n}$ to calculate the sample analogue.
+
+E[XY] = $A_{n}$
+
+E[X] = $B_{n}$
+
+1/n $\sum^n_{i=1}$ $(X_{i})Y_{i}$ for $A_{n}$,
+
+1/n $\sum^n_{i=1}$ ($X_{i}$) for $B_n$, 
+
+The ratio $A_{n}/B_{n}$ is: 
+1/n $\sum^n_{i=1}$ $(X_{i})Y_{i}$ / (1/n $\sum^n_{i=1}$ $X_{i}$) = the sample analogue $\hat{\mu}_{Y\mid 1}$.
+
+
+\textbf{4.3} Show that for X: supp X = {0,1}, E[Y$\mid$ X] = XE[Y$\mid$X =1] + (1-X)E[Y$\mid$X = 0]  
+
+Multiply both sides by X:
+
+XE[Y$\mid$ X] = $X^{2}$ E[Y$\mid$X =1] + X(1-X)E[Y$\mid$X = 0]
+
+XE[Y$\mid$ X] = $X^{2}$ E[Y$\mid$X =1] + XE[Y$\mid$X = 0] - $X^{2}$ E[Y$\mid$X = 0]
+
+As $X^{2}$ E[Y$\mid$X = 0] - X E[Y$\mid$X = 0] = 0 because 
+$X^{2}$ E[Y$\mid$X = 0] = X E[Y$\mid$X = 0]
+
+Using the same logic, XE[Y$\mid$X] = $X^{2}$ E[Y$\mid$X =1] = XE[Y$\mid$X = 1].
+
+\textbf{4.4}
+Show that your estimator is unbiased conditional on $\sum_{i}$ $X_{i}$ $>$ 0.
+
+\textbf{4.5} Show that $\hat{\mu}_{Y\mid1}$ $\xrightarrow{p}$ E[Y$\mid$X = 1]
+
+Do 4 step process:
+
+1.
+Define:
+
+$A_{n}$ is congruent to 1/n $\sum^n_{i=1} X_{i}Y_{i}$
+
+$B_{n}$ is congruent to 1/n $\sum^n_{i=1} X_{i}$
+
+2. Define g(a,b) = a/b
+
+3. 
+
+By WLLN, we get that $A_{n}$ $\xrightarrow{p}$ E[XY]
+
+By WLLN, we get that $B_{n}$ $\xrightarrow{p}$ E[X]
+
+4. By CMT:
+
+$g(A_{n}, B_{n})$ $\xrightarrow{p}$ E[YX] / E[X] 
+
+From 4.1, we know that E[YX] / E[X] = E[Y $\mid$ X=1].
+
+Thus, $g(A_{n}, B_{n})$ $\xrightarrow{p}$ E[Y $\mid$ X=1].
+
+$\forall E[X] \in R.$
+
+\textbf{4.6} Show that $\sqrt{n}$ ($\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X= 1]) = $\sqrt{n}$ (1/n$\sum^n_{i=1} X_{i}U_{i}$ / (1/n$\sum^n_{i=1} X_{i}$)).
+
+We know that 
+$\hat{\mu}_{Y\mid1}$ = $\sum^n_{i=1} (X_{i}$ * $Y_{i}$) / ($\sum^n_{i=1} X_{i}$).
+
+Where $U_{i}$ is congruent to $Y_{i} - E[Y_{i} $\mid$ X_{i}]$.
+
+First, 
+$Y_{i}$ = $E[Y_{i}$ $\mid$ $X_{i}$] + $U_{i}$
+
+Thus,
+$\sqrt{n}$ ($\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X= 1]) = $\sqrt{n}$ (1/n$\sum^n_{i=1} (E[Y_{i} $ $\mid$ $X_{i}]$ + $U_{i}$) $X_{i}$ / (1/n$\sum^n_{i=1} X_{i}$)).
+
+To elaborate within the numerator:
+
+$(E[Y_{i}$ $\mid$ $X_{i}$] + $U_{i}$) $X_{i}$) =  $E[Y_{i} $ $\mid$ $X_{i}]$ * $X_{i}$ + ($U_{i}$) $X_{i}$ 
+
+From part 4.3, we find that XE[Y$\mid$X] = XE[Y$\mid$X = 1].
+
+Therefore, $\sum^n_{i=1}$ ($(E[Y_{i}$ $\mid$ $X_{i}$] + $U_{i}$) $X_{i}$)/ ($\sum^n_{i=1} X_{i}$) =  $E[Y_{i}$ $\mid$ $X_{i} = 1]$ * $X_{i}$ + $U_{i}$ * $X_{i}$ / ($\sum^n_{i=1} X_{i}$). 
+
+$\sum^n_{i=1}$ ($(E[Y_{i}$ $\mid$ $X_{i}$] + $U_{i}$) $X_{i}$)/ ($\sum^n_{i=1} X_{i}$) = $\sum^n_{i=1}$ ($U_{i}$ $X_{i}$) / ($\sum^n_{i=1} X_{i}$) + $E[Y_{i}$ $\mid$ $X_{i} = 1]$  
+
+$\hat{\mu}_{Y\mid1}$ - $E[Y_{i}$ $\mid$ $X_{i} = 1]$ = $\sum^n_{i=1}$ ($U_{i}$ $X_{i}$) / ($\sum^n_{i=1} X_{i}$)
+
+We can expand on this, saying that 
+
+$\sqrt{n}$ ($\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X= 1]) = $\sqrt{n}$ (1/n$\sum^n_{i=1} X_{i}U_{i}$ / (1/n$\sum^n_{i=1} X_{i}$)).
+
+\textbf{4.7}
+
+From part 4.6,
+
+$\sqrt{n}$ $\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X = 1] = $\sqrt{n}$ (1/n$\sum^n_{i=1} X_{i}U_{i}$ / (1/n$\sum^n_{i=1} X_{i}$))
+
+From Slutsky's Theorem:
+
+If $A_{n}$ $\xrightarrow{p}$ A and $B_{n}$ $\xrightarrow{d}$ B, then $A_{n}$/$B_{n}$  $\xrightarrow{d}$ A/b.
+
+1. $A_{n}$ is congruent to $\sqrt{n}$ 1/n$\sum^n_{i=1} X_{i}U_{i}$
+
+ $B_{n}$ is congruent to 1/n $\sum^n_{i=1} X_{i}$
+
+2. By CLT, $A_{n}$ = ($\sqrt{n}$ 1/n$\sum^n_{i=1} X_{i}U_{i}$ - E[UX]) $\xrightarrow{d}$ N(0, Var(UX)).
+
+3. By WLLN, $B_{n}$ = 1/n $\sum^n_{i=1} X_{i}$ $\xrightarrow{p}$ E[X_{i}] = P(X_{i} = 1)
+
+4. $A_{n}$/$B_{n}$ $\xrightarrow{d}$ 1/P(X=1) * N(0, Var(UX))
+
+Need to find E[XU] = 0, and Var(XU) = Var(Y$\mid$X=1)P(X=1)/ $P(x=1)^2$
+
+Function 1: 
+
+$E[U^2 * X]$ = $E[E[U^2 X$ $\mid$ X]] = 0 = E[E[U$\mid$X]X]
+
+= $E[U^2 * X]$
+
+Function 2: Var ($\sum$UX /$\sum$(X))
+
+Var(UX) = E[$U^2 X^2$] = E[$UX]^2$
+
+
+= E[U^2 $\mid$ X = 1] P(X=1)
+
+= E[(Y-E[Y$\mid$ $X])^2$ $\mid$ X=1] P(X=1)
+
+= E[(Y-E[Y$\mid$X=1])^2 $\mid$X= 1] P(X=1)
+
+= Var(Y$\mid$X=1)P(X=1)
+
+Var(UX) = Var(Y$\mid$X=1)P(X=1)/ $P(x=1)^2$
+
+Var(Y$\mid$X=1)P(X=1)/ $P(x=1)^2$ = Var(Y$\mid$X=1)/P(X=1))
+
+Thus, we can conclude that $\sqrt{n}$ ($\hat{\mu}_{Y\mid1}$ - E[Y$\mid$ X = 1]) $\xrightarrow{d}$ N(0,Var(Y$\mid$X=1)/ P(C=1))
+
+\end{document}
