@@ -21,7 +21,9 @@ True. If E[UX] = 0, then E[U$\mid$X] = 0.
 
 By the Law of Iterated Expectations:
 
-E[UX] = E[E[U$\mid$X]X]
+E[UX] = E[E[U$\mid$X]X] = E[UE[U$\mid$X]] 
+
+= E[E[UX$\mid$ X] = 0.
 
 Since we know that E[UX] = 0, we know that E[U$\mid$X] = 0.
 
@@ -53,7 +55,7 @@ The drivers can be correct because the sample distribution does not have to be n
 
 Assuming that the variance is finite, the distribution of the sample averages will follow a normal distribution. It is unbiased since E(X) = $\mu$. And the SD = $\sigma$/$\sqrt(n)$,
 
-so the distribution is N $\sim$ ($\mu$, $\sigma^2/10$).
+so the approximate distribution is N $\sim$ ($\mu$, $\sigma^2/10$).
 
 \textbf{3.2}
 
@@ -61,7 +63,11 @@ so the distribution is N $\sim$ ($\mu$, $\sigma^2/10$).
 
 \textbf{3.3}
 
-The asymptotic distribution of $E_{n}[X]$ = 
+The asymptotic distribution of $E_{n}[X]$ = $\sqrt{n}$  - (1/n $\sum^n_{i=1}$ $X_{i} - \mu$)/$\sigma$ which is the CLT.
+
+As n grows large, the distribution of the sample average is approximately normal. My conclusion does depend on distribution if n is small, but it does not if n is big.
+
+
 %%%%%%%%%%%%%%%%%%%%%%
 % Problem 4 %%%%%%%%%%
 \section{}
@@ -117,6 +123,14 @@ Using the same logic, XE[Y$\mid$X] = $X^{2}$ E[Y$\mid$X =1] = XE[Y$\mid$X = 1].
 
 \textbf{4.4}
 Show that your estimator is unbiased conditional on $\sum_{i}$ $X_{i}$ $>$ 0.
+
+We know that E[$\sum^n_{i=1}$ $(X_{i})Y_{i}$/ $\sum^n_{i=1}$ $(X_{i})$ ] $\mid$ $\sum^n_{i=1}$ $(X_{i})$ $>$ 0] =
+
+E[E[$\sum^n_{i=1}$ $(X_{i})Y_{i}$/ $\sum^n_{i=1}$ $(X_{i})$ ] $\mid$  $\sum X_{i}$ $>$ 0, $X_{i}^n$] $\mid$ $\sum^n_{i=1}$ $(X_{i})$ $>$ 0]
+
+= E[1/$\sum X_{i}$ [$\sum^n_{i=1}$ E[$Y_{i}$ $\mid$  $\sum X_{i}$ $>$ 0, $X_{i}^n$] $\mid$ $\sum^n_{i=1}$ $(X_{i})$ $>$ 0]]
+
+However, E[$Y_{i}$ $\mid$  $\sum X_{i}$ $>$ 0, $X_{i}^n$] $\neq$ E[$Y_{i}$ $\mid$ $X_{i}$ ] because not independent.
 
 \textbf{4.5} Show that $\hat{\mu}_{Y\mid1}$ $\xrightarrow{p}$ E[Y$\mid$X = 1]
 
@@ -324,6 +338,8 @@ $\sigma$/$\sqrt{\hat{\sigma}^2_{Y\mid1}/\hat{p}_X}$ $\xrightarrow{p}$ $\sigma / 
 
 4. By Slutsky's, $B_{n}$ * $A_{n}$ = 1 * N(0,1) $\stackrel{d}{=}$ N(0,1).
 
+Thus, $\sqrt{n}(\hat{\mu}^2_{Y\mid1} - {\mu}^2_{Y\mid1})$ / $\sqrt{\hat{\sigma}^2_{Y\mid1}/\hat{p}_X}$ $\xrightarrow{d}$ N(0,1).
+
 \textbf{4.12}
 
 Part k shows that se($\hat{\mu}_{Y\mid1}$) is congruent to 1/$\sqrt{n}$ * $\sqrt{{\sigma}^2_{Y\mid1}/\hat{p}_X}$
@@ -333,7 +349,17 @@ The confidence interval E[Y$\mid$ X = 1] = ($\hat{\mu}_{Y\mid1}$ - $z_{0.975}$ *
 \textbf{4.13}
 
 Suppose that $\hat{\mu}_{Y\mid1}$ = 10 and se($\hat{\mu}_{Y\mid1}$) = 3.
+The 95\% confidence interval is:
 
-10 - 1.96(1/$\sqrt{n}) 3$, 10 + 1.96 + (1/$\sqrt{n}) 3$ = 
+10 - 1.96(3), 10 + 1.96(3) = (4.12, 15.88)
+
+I reject $H_{0}$ at the 5\% significance level, as (E[Y$\mid X = 1])$ = 4 is less than 4.12, which was the lower bound of the confidence interval.
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Github Link to Repository %%%%%%%%%
+\newpage
+\textbf{Github Link to Repository:}
+
+https://github.com/alexd1-comp/Econ-21020-PSets
 
 \end{document}
