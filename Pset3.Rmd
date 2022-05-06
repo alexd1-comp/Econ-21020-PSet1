@@ -1,0 +1,146 @@
+---
+title: "Econ Pset 3"
+author: "Alex Ding"
+date: '2022-05-06'
+output: pdf_document
+---
+
+```{r}
+# Load the ak91.csv data
+df = read.csv("C:\\Users\\alexm\\Documents\\ak91.csv")
+n = nrow(df)
+n
+
+# Store years of education and the weekly wage in separate variables
+yrs_educ = df$YRS_EDUC
+wkly_wage = df$WKLY_WAGE
+
+```
+
+6a:
+```{r}
+
+#Compute OLS estimates
+
+beta = cov(wkly_wage, yrs_educ) / var(yrs_educ)
+alpha = mean(wkly_wage) - mean(yrs_educ) * beta
+
+```
+
+6b:
+
+```{r}
+alpha
+beta
+```
+
+$\hat \alpha_{n}$ = 61.1954
+
+$\hat \beta_{n}$ = 29.6224
+
+A brief economic interpretation of $\hat \beta_{n}$ is that an additional year of education is associated with an approximate expected change of weekly wage by 29.6224 dollars.
+
+6c.
+```{r}
+# Compute BLP estimates 
+blp_yx = alpha + 16 * beta
+blp_yx
+```
+My estimate for BLP(Y $\mid$ X = 16) is 535.1538. This result differs from what I got from Problem 5b of PSet 2. This is because BLP(Y $\mid$ X = 16) does not equal E[Y $\mid$ X = 16).
+
+6d.
+```{r}
+epsilon = wkly_wage - blp_yx
+se_numer = sqrt(mean(epsilon^2 * (wkly_wage-mean(wkly_wage))^2))
+se = (se_numer / var(wkly_wage)) / sqrt(n)
+se
+```
+The se ($\hat \beta_{n}$) = 0.07308
+
+6e.
+The test statistic is:
+```{r}
+tstat = abs((beta - 31)) / se
+tstat
+```
+The tstat is calculated to be 18.85.
+
+6f:
+The p-value is calculated by:
+
+2 * (1- $\phi$(6.0194)) which is less than 0.00001.
+
+p-value is less than 0.00001.
+
+6g:
+Brief economic interpretation:
+
+On a 10% significance level, there is sufficient evidence to reject that the approximate expected change in weekly wage associated with a additional year in education is 31. This is because our p-value of ($<$ 0.0001) is less than 0.1.
+
+7a:
+```{r}
+my_simplecoef <- function(y,x) {
+# Compute and return estimates for alpha and beta
+
+beta = cov(y, x) / var(x)
+alpha = mean(y) - mean(x) * beta
+estimates = c(alpha,beta)
+return(estimates)
+}
+# Test the function using your solution to Problem 6
+coef <- my_simplecoef(wkly_wage,yrs_educ)
+coef
+
+```
+
+7b
+```{r}
+# Define a custom function to compute the blp estimates
+my_simpleblp <- function (coef,x) {
+blp_yx = alpha + x * beta
+return(blp_yx)
+}
+# Test the function
+mean(wkly_wage) - mean(my_simpleblp(coef, yrs_educ)) 
+```
+
+7c:
+```{r}
+# Define a custom function to compute the standard error
+my_simplese <- function (coef,y,x) {
+epsilon = y - my_simpleblp(coef, x)
+se_numer = sqrt(mean(epsilon^2 * (y-mean(y))^2))
+se = (se_numer / var(y)) / sqrt(n)
+return(se)
+}
+# Test the function using your solution to Problem 6
+se <- my_simplese(coef, wkly_wage, yrs_educ)
+se
+```
+7d:
+```{r}
+# Define a custom function to compute the test stat and p-value
+my_simpleteststat <- function (beta, se) {
+  tstat = abs(beta) / se
+  pval = 1 - pnorm(abs(tstat))
+  tests = c(tstat,pval)
+  return(tests)
+}
+# Test the function using your solution to Problem 6
+my_simpleteststat(coef[2] - 31 , se)
+```
+7e.
+```{r}
+# Define a custom function to compute and characterize ols estimates
+my_simpleols <-function (y,x) {
+  my_simplecoef(y,x)
+  beta = coef[2]
+  se_beta = my_simplese(coef, y, x)
+  tests_beta = my_simpleteststat(coef[2] - 31 , se_beta)
+  ols_estimate = c(beta,se_beta,tests_beta)
+  return(ols_estimate)
+}
+# Test the function using your solution to Problem 6
+my_simpleols(wkly_wage,yrs_educ)
+```
+
