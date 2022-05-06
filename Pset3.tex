@@ -19,9 +19,73 @@
 
 \textbf{1.1}
 
+False.
+
+At first glance, it looks like a clear application of CLT.
+
+However,
+By definition of CLT, the random variable X has to be i.i.d, but in case is not. Therefore, we cannot use CLT to prove that $\sqrt{n}$ (1/n $\sum^n_{i=1} X_{i} - E[X]$) $\xrightarrow{d}$ N (0, Var(X)).
+
+A counter example X would be the Cauchy distribution due to its variance and its mean being undefined. There is no condition that the mean and variance of X have to be defined.
+
+\textbf{1.2}
+
+False.
+
+We need W and X and W and U to be independent first in order to prove it.
+
+Counter example:
+If W and X are not independent, 
+let U be the difference in coins landing heads minus tails, W be the number of coins flipped, and X be a binary random variable that measures if there is a person who rigs the result of the coin toss to always land heads. We see that E[U $\mid W$] is 0, but E[U $\mid$ W,X] is not 0. 
+
+\textbf{1.3}
+
 False,
 
+Use the Yitzhaki Theorem:
+
+$\beta$ = $\int_{-\infty}^{\infty}$ ($\partial{d}/\partial{dt}$ E[Y $\mid X = t$]) $\omega$(t) dt.
+
+Where ($\partial{d}/\partial{dt}$ E[Y $\mid X = t$]) = 2t
+
+$\beta$ = $\int_{-\infty}^{\infty}$ 2t $\omega$(t) dt.
+
+X ~ U(0,1), so we know that $\omega$(t) =
+12(1/2(t+1) - 1/2t) (1-t) (t) = 6(1-t)t
+
+$\beta$ = 6 *$\int_{0}^{1}$ 2t * (1-t) * t dt.
+
+$\beta$ = 6* 3/2 $t^{3}$ - 1/2$t^{4}$ from 0 to 1.
+
+$\beta$ = 6(3/2 - 1/2) = 6.
+
+As we see, β $\neq$ 1, where β is the BLP coefficient.
+
 \section{}
+
+\textbf{2.1}
+
+One example of an unobserved determinant U of Y is whether or not the offender had both parents.
+
+Another example of an unobserved determinant U of Y is whether or not there was chronic absenteeism when they went to school.
+
+\textbf{2.2}
+
+The random assignment assumption states that (Y,W,U) be a random vector with joint distribution characterized by g(W,U). Random assignment will assume that W is independent of U. The policy W is independent of all other determinants used, meaning that the decision of confinement being included in the offender's sentence is independent of all other factors.
+
+It does not seem plausible because the justice system and sentencing is inherently biased against certain types of people based on wealth, race, gender.
+
+\textbf{2.3}
+
+The outcomes for W $\in{0,1}$:
+
+When W = 0, it means that the offender's punishment is not going to be in confinement.
+
+When W = 1, it means that the offender will be in confinement as part of the punishment.
+
+\textbf{2.4}
+
+ATE is the causal parameter that is the expected difference of the offender's recidivism of when offenders get confinement compared to offenders that do not.
 
 \textbf{2.5}
 
@@ -59,8 +123,99 @@ Substitute (-1/5, 1) for ATU
 
 Range of ATT: (-1/5, -1)
 
+\textbf{2.8}
+
+No, under the solution of part f) as the range of ATT values contain both positive or negative values, so we don't know if changing sentences of juvenile offenders who are about to be sentenced to confinement will increase or decrease expected recidivism.
+
 \newpage
 \section{}
+
+\textbf{3.1}
+
+An example of an unobserved determinant U of Y is the amount of time that the student put into the homework assignments for the class.
+
+\textbf{3.2}
+
+The potential outcomes for w $\in$ R is all integers between 1 and 32, since that is the maximum class size. As w is not an average, has to be an integer because cannot have a partial person, so w cannot be defined as a non-integer.
+
+\textbf{3.3}
+
+Beta captures the approximate expected change in final grade associated with a additional student in X.
+
+\textbf{3.4}
+
+The OLS estimate for $\beta$ = $\hat{\beta_{n}}$ = -0.7 and se({$\hat{\beta_{n}}$}) = 0.2.
+
+A 95\% confidence interval can be constructed for beta:
+
+$C_{n}$ = [-0.7 - 1.96 * 0.2, -0.7 + 1.96 * 0.2] = (-1.092, -0.308).
+
+\textbf{3.5}
+
+We find that the test statistic T = $\hat{\beta_{n}}$/  se({$\hat{\beta_{n}}$}) = 0.7/0.2 = 3.5.
+
+The p-value is 1- $\phi$(3.5) $<$ 0.05.
+
+On a 5\% significance level, we will reject the null hypothesis that $\beta$ = 0. Therefore, there is significant evidence to reject that class sizes do not impact student final grades.
+
+\textbf{3.6}
+
+The article is trying to make a causal claim and interpretation using a descriptive parameter. They do not make an assumption such as RA which would allow them to make a causal interpretation of $\beta$.
+
+\textbf{3.7}
+
+Under Random assignment, we know that W is independent of U, with RA, we can say that students in smaller class sizes perform significantly better on the class final.
+
+I think RA does not seem plausible because students with better grades will generally take classes with smaller class sizes because of better organization in scheduling, and also that high-achieving students will take classes with smaller class sizes.
+
+\section{}
+
+\textbf{4.1}
+
+Try to expand then take FOC of min E[(Y- ($\alpha + X \beta))^2$] to find if the minimizers align with the BLP-coefficients.
+
+Let R($\alpha, \beta$) = $E[Y]^2 - 2E[Y]$ ($\alpha + X \beta$) + ($\alpha + X \beta$)^2
+
+R($\alpha, \beta$) = $E[Y]^2 - 2* \alpha E[Y]$ - 2E[YX] * $\beta$ + $\alpha^2$ + $2* \alpha E[X] * \beta$ + $\beta^2 E[X^2] 
+
+Now take FOCs:
+
+$\partial{d}/\partial{\alpha}$ R($\alpha, \beta$):
+
+-2E[Y] + 2 * $\alpha$ + 2E[X] * $\beta$ = 0
+$\alpha$ = E[Y] - E[X] * $\beta$
+
+$\partial{d}/\partial{\beta}$ R($\alpha, \beta$):
+
+-2E[YX] + 2 * $\alpha$ E[X] + 2E[X^2]$\beta$ = 0
+
+= -2E[YX] + 2 E[Y] E[X] - 2E[X]^2 * $\beta$ + 2E[X^2]$\beta$
+
+= -2(E[YX] - E[Y]E[X]) + 2 * $\beta$ (E[X^2] - E[X^2])
+
+As you can see, the minimizers align with the BLP-coefficients $\alpha$ and $\beta$ found in Theorem 1 of Lecture 6.
+
+\section{}
+
+\textbf{5.1}
+
+X is continuous,
+
+$\omega$(t) = 1/ Var(X) * $\int_{t}^{\infty}$ (x-E[X]) * $f_{x}(x)$ dx
+
+$\omega$(t) = $\int_{-\infty}^{\infty}$ x * I\{x $\geq$ t\} * $f_{x}(x)$/P(X $\geq$ t) * P(X $\geq$ t) dx - E[X] $\int_{t}^{\infty}$ $f_{x}(x)$ dx
+
+= E[X $\mid$ X $\geq$ t] P(X $\geq$ t) - E[X] P(X $\geq$ t)
+
+= (E[X $\mid$ X $\geq$ t] - E[X]) * P(X $\geq$ t) 
+
+Now take FOCs:
+
+0 = (E[X $\mid$ X $\geq$ t] - E[X]) 
+
+E[X] = E[X $\mid$ X $\geq$ t].
+
+We see here that E[X] is the value where $\omega(t)$ will be maximized.
 
 \textbf{5.2}
 
@@ -106,7 +261,4 @@ E[d/dx E[Y $\mid$ X]] = $\int_{0}^{1}$ d/dx E[Y $\mid$ X = t]dt =  $\int_{0}^{1}
 
 1 $\neq$ 6/5, so therefore $\beta$ does not equal to the average derivative of the condition expectation function.
 
-\section{}
-\textbf{1.1}
-E[$\epsilon \mid X]$ = E[Y-E[Y$\mid$X]$\mid$ X] = E[Y$\mid$X]] - E[E[Y$\mid$X]$\mid$ X] = 0 by law of iterated expectations.
 \end{document}
