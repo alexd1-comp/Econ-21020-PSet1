@@ -1,0 +1,220 @@
+%%%%%%%%%%%%%%%%%%%%%%
+% Preamble %%%%%%%%%%%
+\input{preamble.tex}
+\documentclass{article}
+\newcommand\independent{\protect\mathpalette{\protect\independenT}{\perp}}
+\def\independenT#1#2{\mathrel{\rlap{$#1#2$}\mkern2mu{#1#2}}}
+\usepackage{amssymb}
+%%%%%%%%%%%%%%%%%%%%%%
+% Main Document %%%%%%
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Document header %%%%
+{\LARGE \centering ECON 21020 -- Problem Set 4\par}
+{\vspace{-1em} \large \centering Alex Ding \par}
+{\centering \vspace{-1em} \today \par }
+
+%%%%%%%%%%%%%%%%%%%%%%
+% Problem 1 %%%%%%%%%%
+
+\section{}
+
+\textbf{1.1}
+
+False.
+
+A counterexample would be $W \independent U$ \par where U and W have a 1/2 probability to get a value of 0 and a 1/2 probability to get a value of 1. 
+
+Let X = WU. $W \independent U$, \par but $W \not\!\perp\!\!\!\perp U \mid X$ as if X = 0, P(W=0) = 2/3. However, $Pr(W=0 \mid U = 0)$ = 1/2. Thus, P(W=0) $<$ $P(W=0\mid P(U=0))$, which cannot happen if $W \independent U \mid X$.
+
+\textbf{1.2}
+
+False.
+
+A counterexample would be X being a Bernoulli random variable with probability of success 0.5. Thus $X_{n}$, for n$>1$ will be equal to X. For simplicity we will define another random variable Y to be 1-X. As the probability of success is 0.5, the probability of success for Y is equal to X. We know that $X_{n}$ $\xrightarrow{d}$ Y as they have the same distribution. 
+
+However, we will go back to the definition of $\xrightarrow{p}$ and consistency and see that $\lim_{x \to \infty} Pr[X_{n} - Y \mid \geq \epsilon] > 0$. This is because $[X_{n} - Y] = [X_{n} - (1 - X)] = [2X -1] $
+
+So we plug in $\lim_{\nrightarrow \infty} Pr[X_{n} - Y \mid \geq \epsilon] = Pr[ 1 \geq 1/2] = 1$. As 1 $\neq$ 0 and the probability of success for Y is equal to X, we can say that $X_{n}$ is not convergence in probability to X.
+
+\textbf{1.3}
+
+False.
+
+A counterexample would be setting Y = $X^{2}$ and then setting k = 1. Let $X_{1}$ $\sim{}$ N(0,1).
+
+By definition, $\epsilon$ = Y - BLP(Y$\mid$X).
+
+Thus, E[$\epsilon \mid$ X] = E(Y - BLP(Y$\mid$X) $\mid$ X).
+
+The BLP(Y$\mid$X) = $\alpha + X\beta$. $\alpha$ = E[Y] - E[X]$\beta$ = $[X^{2}]$ = 1. $\beta$ = 0 since Cov(Y,X) = $E[X^{3}] - E[X^{2}]E[X]$ = 0.
+
+Thus, E[Y - BLP(Y$\mid$X) $\mid$ X] = E(Y - 1 $\mid$ X) = $E[X^{2} \mid X]$ - 1 = $X^{2}$ -1 $\neq$ 0.
+
+\section{}
+
+\textbf{2.1}
+
+We want to show that the estimator $\hat{\sigma}^{2}_{ATE}$ is consistent, which means that it converges in probability for $\sigma^{2}_{ATE}$.
+
+1. We want to define terms:
+
+$A_{n}^{(x)}$ is congruent to $\hat{\sigma}^{2}_{CATE} (1)$
+
+$B_{n}^{(x)}$ is congruent to $\hat{\sigma}^{2}_{CATE} (0)$
+
+$C_{n}^{(x)}$ is congruent to $\hat{p}_{n} (1)$
+
+$D_{n}^{(x)}$ is congruent to $\hat{p}_{n} (0)$
+
+$E_{n}^{(x)}$ is congruent to $\widehat{CATE}_{n} (1)$
+
+$F_{n}^{(x)}$ is congruent to $\widehat{CATE}_{n} (0)$
+
+$\forall$ x $\in$ X.
+
+2. g(($a^{(x)},b^{(x)},c^{(x)},d^{(x)},e^{(x)},f^{(x)}) x \in X$) = $a^{(x)} (c^{(x)})^{2} + b^{(x)} (d^{(x)})^{2} + (e^{(x)} - f^{(x)}) c^{(x)} d^{(x)}$
+
+3. By Problem Set 2 and Lecture 5,  $\hat{\sigma}^{2}_{CATE} (1)$ $\xrightarrow{p}$ ${\sigma}^{2}_{CATE} (1)$
+
+By Problem Set 2 and Lecture 5,  $\hat{\sigma}^{2}_{CATE} (0)$ $\xrightarrow{p}$ ${\sigma}^{2}_{CATE} (0)$
+
+By Problem Set 2, $\hat{p}_{n} (1)$ $\xrightarrow{p}$ P(X=1).
+
+By Problem Set 2, $\hat{p}_{n} (0)$ $\xrightarrow{p}$ P(X=0).
+
+By Corollary 2 of Lecture 7, $\widehat{CATE}_{n} (1)$ $\xrightarrow{p}$ ${CATE}_{n} (1)$
+
+By Corollary 2 of Lecture 7, $\widehat{CATE}_{n} (0)$ $\xrightarrow{p}$ ${CATE}_{n} (0)$
+
+4. By the CMT, g(($a^{(x)},b^{(x)},c^{(x)},d^{(x)},e^{(x)},f^{(x)}) x \in X$) $\xrightarrow{p}$ $\sigma^{2}_{ATE}$
+
+Everything else will follow from Theorem 4 + Slutsky's Theorem.
+
+\section{}
+
+\textbf{3.1}
+
+A brief interpretation of P(W =1 $\mid$ X) is the probability of the policy W = 1 when conditional of X, where W is a binary policy variable where the two possible values of W are either 1 or 0.
+
+\textbf{3.2}
+
+P(U $\leq$ u, W = 1 $\mid$ p(X)) = P(U $\leq$ u, W = 1 $\mid$ p(X))
+
+= E[I\{ U $\leq$ u, W = 1\} $\mid$ p(x))]
+
+= E[I\{U $\leq$ u\} $I\{ W=1\}$ $\mid$ p(x))]
+
+Since $W \independent U$,
+
+=  P(U $\leq$ u $\mid$ p(x)) P(W=1 $\mid$ p(x))
+
+$\forall$ u $\in$ supp U $\mid$ p(X).
+
+and we know that p(X) is congruent to P(W =1 $\mid$ X).
+
+\textbf{3.3}
+
+The parameter E[g(1,U) - g(0,U) $\mid$ p(X) = p] is the expected causal effect of the policy W for a scalar random variable p(X) with probability p.
+
+$\forall$ p $\in$ supp p $\mid$ p(X).
+
+\textbf{3.4}
+
+E[g(1,U) - g(0,U) $\mid$ p(X) = p]
+
+ATT:
+
+By L.I.E:
+= E[E[g(1,U) - g(0,U) $\mid$ p(X) = p, X] $\mid$ p(X) = p]
+
+By SO: = E[E[g(1,U) - g(0,U) $\mid$ X] $\mid$ p(X) = p] = E[CATE(X) $\mid$ p(X) = p]
+
+ATU:
+
+By L.I.E:
+
+= E[E[g(1,U) - g(0,U) $\mid$ p(X) = 1 - p, X] $\mid$ p(X) = 1 - p]
+
+By SO: = E[E[g(1,U) - g(0,U) $\mid$ X] $\mid$ p(X) = 1 - p] = E[CATE(X) $\mid$ p(X) = 1- p]
+
+ATE: = E[CATE(x)]
+
+\section{}
+
+\textbf{4.1}
+
+An example of an unobserved determinant is years of education before joining the military.
+
+\textbf{4.2}
+
+An example for a potential confounder would be an indicator for if there was a major war in the US during the individual's year of service.
+
+\textbf{4.3}
+
+We have:
+
+g(1,U) is equal to the lifetime savings of an individual that served in the military.
+
+g(0,U) is equal to the lifetime savings of an individual that did not serve in the military.
+
+\textbf{4.4}
+
+A brief assumption is that conditional on individuals being male, serving on the military should be independent of all other determinants other than being male.
+
+It does not appear plausible here because it is well known that many males in the US avoided being drafted in the Vietnam war by medical exemptions, college, family obligations, moving to neighboring countries, so not independent.
+
+\textbf{4.5}
+
+It makes the selection on observable assumption more plausible since the selection mechanism is known more clearer than in part d.
+
+\textbf{4.6}
+
+CATE(1) is the expected causal effect of military service on lifetime earnings for a randomly selected individual that is male.
+
+CATE(0) is the expected causal effect of military service on lifetime earnings for a randomly selected individual that is not male.
+
+\textbf{4.7}
+
+CATE(1) is point-identified under the assumptions of the exercise, as we can say that military participation is reasonably random. 
+
+\textbf{4.8}
+
+CATE(0) is point-identified under the assumptions of the exercise, namely that only men were drafted in the Vietnam war era, thus we can say that there
+
+\textbf{4.9}
+
+The ATE is the expected causal effect of military service on lifetime earnings for a randomly selected individual.
+
+\textbf{4.10}
+
+The ATE is point-identified under the assumptions of the exercise
+
+\section{}
+
+\textbf{5.1}
+
+$E[(Y- X^{T}\beta)^{2}]$ = E[(Y - E[Y $\mid$ $X^{T}$] + E[Y $\mid$ $X^{T}$] - $(X^{T}\beta))^{2}$]
+
+= E[(Y - E[(Y $\mid$ $X^{T})^{2}$] + E[E[Y $\mid$ $X^{T}$] - $(X^{T}\beta))^{2}$] + 2E[(Y-E[Y $\mid X^{T}$]) (E[Y $\mid X^{T}$ - $(X^{T}\beta)$)
+
+We will focus on the last term:
+
+By L.I.E: 
+
+E[E[Y-E[Y $\mid X^{T}$]) (E[Y $\mid X^{T}$ - $(X^{T}\beta)$) $\mid$ X]]
+
+= E[E[Y-E[$YX^{T}$] $\mid$ X])] (E[Y $\mid X^{T}$ - $(X^{T}\beta)$)])
+
+= E[(E[$YX^{T}$] - E[Y $\mid X^{T}$])] (E[Y $\mid X^{T}$ - $(X^{T}\beta)$)])
+
+= 0.
+
+E[(Y - E[Y $\mid$ $X^{T}])^{2}$] = E[Y] - E[Y] = 0.
+
+Thus, $E[(Y- X^{T}\beta)^{2}]$ = E[E[Y $\mid$ $X^{T}$] - $(X^{T}\beta))^{2}$] + $\gamma$, which shows that the objective functions in the two minimization problems are equivalent, and that the solutions are identical.
+
+
+
+\end{document}
