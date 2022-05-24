@@ -100,19 +100,61 @@ A brief interpretation of P(W =1 $\mid$ X) is the probability of the policy W = 
 
 \textbf{3.2}
 
+Sufficiency of the Propensity score:
+
 P(U $\leq$ u, W = 1 $\mid$ p(X)) = P(U $\leq$ u, W = 1 $\mid$ p(X))
 
 = E[I\{ U $\leq$ u, W = 1\} $\mid$ p(x))]
 
 = E[I\{U $\leq$ u\} $I\{ W=1\}$ $\mid$ p(x))]
 
-Since $W \independent U$,
+= E[I\{U $\leq$ u\} W $\mid$ p(x))]
 
-=  P(U $\leq$ u $\mid$ p(x)) P(W=1 $\mid$ p(x))
+Now we have to use L.I.E:
+
+= E[E[I\{U $\leq$ u\}E[ W $\mid$ p(x))], I\{U $\leq$ u\} = 1] $\mid$ p(x)]
+
+= E[E[I\{U $\leq$ u\} w $\mid$ p(x), U $\leq$ u] $\mid$ p(x)]
+
+= E[I\{U $\leq$ u\} E[w $\mid$ p(x), I\{U $\leq$ u\} $\mid$ p(x)]]
+
+= 1 * E[w $\mid$ p(x), U $\leq$ u] P(U $\leq$ u $\mid$ p(x)) + 0 * E[w $\mid$ p(x), U $>$ u] P(U $>$ u $\mid$ p(x))
+
+= E[w $\mid$ p(x), U $\leq$ u] P(U $\leq$ u $\mid$ p(x)).
+
+We now have one part of the equation we need to solve, now we focus on the other half.
+
+Use L.I.E:
+
+E[w $\mid$ p(x), U $\leq$ u] = E[E[w $\mid$ p(x), U $\leq$ u, X] $\mid$ p(x), U $\leq$ u]
+
+= E[E[W $\mid$ U $\leq$ u, X] $\mid$ p(x), U $\leq$ u]
+
+Now we use SO:
+
+= E[E[W $\mid$ X] $\mid$ p(x), U $\leq$ u]
+
+= E[p(x) $\mid$ p(x), U $\leq$ u]
+
+= p(x) E[1 $\mid$ p(x), U $\leq$ u]
+
+= p(x).
+
+We know that P(W =1 $\mid$ p(x)) = E[\{W = 1\} $\mid$ p(X)]
+
+Using L.I.E:
+
+= E[E[\{W = 1\} $\mid$ X, p(X)] $\mid$ p(x)]
+
+= E[E[\{W = 1\} $\mid$ X] $\mid$ p(x)]
+
+= E[p(x) $\mid$ p(x)]
+
+= p(x).
+
+Thus, we are able to show that P(U $\leq$ u, W = 1 $\mid$ p(X)) = P(U $\leq$ u $\mid$ p(x)) P(W =1 $\mid$ p(x)).
 
 $\forall$ u $\in$ supp U $\mid$ p(X).
-
-and we know that p(X) is congruent to P(W =1 $\mid$ X).
 
 \textbf{3.3}
 
@@ -124,14 +166,14 @@ $\forall$ p $\in$ supp p $\mid$ p(X).
 
 E[g(1,U) - g(0,U) $\mid$ p(X) = p]
 
-ATT:
+Parameter 1:
 
 By L.I.E:
 = E[E[g(1,U) - g(0,U) $\mid$ p(X) = p, X] $\mid$ p(X) = p]
 
 By SO: = E[E[g(1,U) - g(0,U) $\mid$ X] $\mid$ p(X) = p] = E[CATE(X) $\mid$ p(X) = p]
 
-ATU:
+Parameter 2:
 
 By L.I.E:
 
@@ -140,6 +182,8 @@ By L.I.E:
 By SO: = E[E[g(1,U) - g(0,U) $\mid$ X] $\mid$ p(X) = 1 - p] = E[CATE(X) $\mid$ p(X) = 1- p]
 
 ATE: = E[CATE(x)]
+
+Thus, E[g(1,U) - g(0,U) $\mid$ p(X) = p] is point-identified $\forall$ p $\in$ supp p(X).
 
 \section{}
 
@@ -167,7 +211,7 @@ It does not appear plausible here because it is well known that many males in th
 
 \textbf{4.5}
 
-It makes the selection on observable assumption more plausible since the selection mechanism is known more clearer than in part d.
+It makes the selection on observable assumption more plausible since the selection mechanism is known more clearer than in part 4d.
 
 \textbf{4.6}
 
@@ -181,7 +225,7 @@ CATE(1) is point-identified under the assumptions of the exercise, as we can say
 
 \textbf{4.8}
 
-CATE(0) is point-identified under the assumptions of the exercise, namely that only men were drafted in the Vietnam war era, thus we can say that there
+CATE(0) is not point-identified under the assumptions of the exercise, as there were no women drafted, implying that there exists no women who are treated since only men were drafted in the Vietnam war era. Thus, there is no common support since the probability of (X = 0, W = 1) is zero under the assumptions.
 
 \textbf{4.9}
 
@@ -189,7 +233,7 @@ The ATE is the expected causal effect of military service on lifetime earnings f
 
 \textbf{4.10}
 
-The ATE is point-identified under the assumptions of the exercise
+The ATE is not point-identified under the assumptions of the exercise because ATE can be expressed as a function of CATE(1) and CATE(0) as ATE = E[CATE(X)]. As CATE(0) is not point-identified as shown in part h, therefore the ATE will not be point-identified as well.
 
 \section{}
 
@@ -215,6 +259,10 @@ E[(Y - E[Y $\mid$ $X^{T}])^{2}$] = E[Y] - E[Y] = 0.
 
 Thus, $E[(Y- X^{T}\beta)^{2}]$ = E[E[Y $\mid$ $X^{T}$] - $(X^{T}\beta))^{2}$] + $\gamma$, which shows that the objective functions in the two minimization problems are equivalent, and that the solutions are identical.
 
+\newpage
 
+Github Link to R Code and Pset:
+
+https://github.com/alexd1-comp/Econ-21020-PSets
 
 \end{document}

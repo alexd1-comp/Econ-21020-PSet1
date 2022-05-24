@@ -1,0 +1,132 @@
+---
+title: "Econ Pset 4"
+author: "Alex Ding"
+date: '2022-05-23'
+output: pdf_document
+---
+  
+```{r}
+#Load the bw06.csv data
+dat = read.csv("C:\\Users\\alexm\\Documents\\bw06.csv")
+dat = as.matrix(dat)
+y = dat[, "birthweight"]
+w = dat[, "cigsdaily"]
+x = cbind(1, dat[, c("boy", "age", "highschool", "somecollege", "college")])
+x_tld = dat[, "married"]
+n = 9800
+```
+
+6.1
+
+```{r}
+beta = cov(y,w) / var(w)
+alpha = mean(y) - mean(w) * beta
+
+blp_yw = alpha + w * beta
+alpha
+beta
+```
+
+The estimate of the BLP (Y $\mid$ W) coefficients is $\alpha$ = 3286.83 and $\beta$ = -12.772.
+
+The $\beta$ coefficient relating to W is the expected causal effect of smoking cigs on infant birth weights for a randomly selected individual.
+
+6.2
+```{r}
+X = cbind(x,w)
+XX_inv = solve(t(X) %*% X)
+XY = t(X) %*% y
+beta = XX_inv %*% XY
+
+blp_yx = X %*% beta
+beta
+```
+
+An estimate of $\beta_{w}$ is -11.062. The $\beta_{w}$ coefficient is the expected causal effects on smoking cigs on infant birth weights for a randomly selected individual controlling for if the mother had a boy, the mother's age, and if the mother was either a high school grad, completed some college, or was a college grad.
+
+6.3
+
+My estimate in part a) slightly differs from part b) due to the possibility of a confounding variable not being accounted for in part b).
+
+6.4 
+
+The interviewer disinterpreted the results because it is a causal intepretation for a descriptive parameter, in this case $\beta$. We will need to use Selection on Observables where it is conditioned on X in order to make a causal statement.
+
+6.5 
+
+Common support assumes that supp X $\mid$ W = supp X. That is, P(X =x, W=w) > 0 for discrete X and $f_{X,W}(x,w) > 0. This means that for all random variables in X, in this case, the mother's age, if the infant is boy or girl, and their educational level, there will exist individuals with infants when conditioned in W, which in this case is daily cigs smoked.
+
+The selection on observables assumption conditioned on X assumes that conditional on gender of child, educational level, and mother's age, cigs smoked is independent of all other determinants of birth weight.
+
+6.6
+
+For Common Support, need that P(W=w, X=x) $>$ 0, $\forall$ (w,x) $\in$supp W * Supp X.
+
+Let us say
+w = 30
+x = (1,32,0,0,1)
+
+There exists an individual that w = 30 and there exists an individual that x = (1,32,0,0,1). However, we cannot find an individual that has w =30 and x(1,32,0,0,1). Therefore, we cannot verify common support using the observed data.
+
+Problem 7:
+
+7.1
+```{r}
+# Define a custom function to compute the ols estimates
+my_coef = function(y, X) {
+  XX_inv = solve(t(X) %*% X)
+  XY = t(X) %*%  y
+  beta = XX_inv %*% XY
+}
+coef = my_coef(y, X)
+coef
+```
+
+7.2
+```{r}
+# Define a custom function to compute the blp estimates
+my_blp = function(coef, x){
+  blp_yx = X %*% beta
+}
+mean(y-my_blp(coef, X))
+```
+
+7.3
+```{r}
+#Define a custom function to compute the standard error
+
+my_se = function(coef, y, X){
+  epsilon = c(y - my_blp(coef, X))
+  XX_eps2 = t(X * epsilon) %*% (X * epsilon)
+  Sigma = XX_inv %*% XX_eps2 %*% XX_inv #* n
+  se = sqrt(diag(Sigma)) #/ sqrt(n)
+}
+
+se = my_se(coef, y ,X)
+se
+```
+
+7.4
+```{r}
+#Define a custom function to compute the test stat and p-value
+my_teststat = function(beta, se){
+  tstat = beta / se
+  pval = 1 - pnorm(abs(tstat))
+  tests = cbind(tstat,pval)
+  return(tests)
+}
+my_teststat(coef, se)
+```
+
+7.5
+```{r}
+my_ols = function(y, X){
+  beta = my_coef(y,X)
+  se_beta = my_se(coef, y, X)
+  tests_beta = my_teststat(beta, se_beta)
+  ols_estimate = cbind(beta, se_beta, tests_beta)
+  return(ols_estimate)
+}
+my_ols(y,X)
+```
+
